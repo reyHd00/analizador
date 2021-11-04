@@ -40,5 +40,7 @@ public enum Tokens {
     P_coma,
     Identificador,
     Numero,
-    ERROR
+    SELECT,
+    FROM,
+    ERROR;
 }

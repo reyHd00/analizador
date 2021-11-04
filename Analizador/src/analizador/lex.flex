@@ -36,6 +36,11 @@ espacio=[ ,\t,\r]+
 /* Palabra reservada Else */
 ( else ) {lexeme=yytext(); return Else;}
 
+/**//* Palabra reservada SELECT */
+( SELECT ) {lexeme=yytext(); return SELECT;}
+
+/* Palabra reservada FROM */
+( FROM ) {lexeme=yytext(); return FROM;}
 /* Palabra reservada Do */
 ( do ) {lexeme=yytext(); return Do;}
 
