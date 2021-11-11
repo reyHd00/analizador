@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 package analizador;
+
 import java.io.*;
 import java.nio.file.*;
+
 /**
  *
  * @author reyna
@@ -25,8 +27,8 @@ public class JFlexPro {
             Files.delete(rutaSym);
         }
         Files.move(
-                Paths.get(rutaProy + "/sym.java"),
-                Paths.get(rutaProy + "/src/analizador/sym.java")
+            Paths.get(rutaProy + "/sym.java"),
+            Paths.get(rutaProy + "/src/analizador/sym.java")
         );
         Path rutaSin = Paths.get(rutaProy + "/src/analizador/Sintax.java");
         if (Files.exists(rutaSin)) {
@@ -39,23 +41,22 @@ public class JFlexPro {
     }
 
     /*public static void generarLexer() throws Exception {
-        // Ruta del archivo donde se encuentra el archivo lex.flex
-        String[] ruta = {"C:\\Users\\reyna\\OneDrive\\Documentos\\NetBeansProjects\\Analizador\\analizador\\Analizador\\src\\analizador\\lex.flex"};
+     // Ruta del archivo donde se encuentra el archivo lex.flex
+     String[] ruta = {"C:\\Users\\reyna\\OneDrive\\Documentos\\NetBeansProjects\\Analizador\\analizador\\Analizador\\src\\analizador\\lex.flex"};
 
-        try {
-            jflex.Main.generate(ruta);
-        } catch (Exception e) {
-            throw new Exception("Error al crear  Archivo Lexer.java " + e);
-        }
-    }*/
-
+     try {
+     jflex.Main.generate(ruta);
+     } catch (Exception e) {
+     throw new Exception("Error al crear  Archivo Lexer.java " + e);
+     }
+     }*/
     public static void main(String[] args) throws Exception {
-        
+
         /*try {
-            generarLexer();
-        } catch (Exception ex) {
-            throw new Exception("Error al generar Archivo Lexer" + ex);
-        }*/
+         generarLexer();
+         } catch (Exception ex) {
+         throw new Exception("Error al generar Archivo Lexer" + ex);
+         }*/
         try {
             generar();
         } catch (Exception ex) {
