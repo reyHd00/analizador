@@ -10,6 +10,7 @@ package analizador;
  * @author reyna
  */
 public enum Tokens {
+
     Reservadas,
     Linea,
     Comillas,
@@ -42,5 +43,7 @@ public enum Tokens {
     Numero,
     SELECT,
     FROM,
+    Dos_Puntos,
+    Coma_Simple,
     ERROR;
 }

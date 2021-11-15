@@ -104,6 +104,11 @@ espacio=[ ,\t,\r]+
 /* Punto y coma */
 ( ";" ) {lexeme=yytext(); return P_coma;}
 
+/* Dos Puntos */
+( ":" ) {lexeme=yytext(); return Dos_Puntos;}
+/* Coma */
+( "," ) {lexeme=yytext(); return Coma_Simple;}
+
 /* Identificador */
 {L}({L}|{D})* {lexeme=yytext(); return Identificador;}
 

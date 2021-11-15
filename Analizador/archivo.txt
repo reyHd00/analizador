@@ -1,1 +1,7 @@
-//hola mundo
+"popup": {
+    cadena : 123;
+    "cadena" : "hola";
+    cadena: "cadena";
+    cadena : true,
+    cadena :  false;
+  }

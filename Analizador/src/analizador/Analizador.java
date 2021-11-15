@@ -4,7 +4,9 @@ import java.io.*;
 import java.util.regex.*;
 import javax.swing.*;
 import java_cup.runtime.Symbol;
-
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
+import org.fife.ui.rtextarea.RTextScrollPane;
 
 /**
  *
@@ -17,16 +19,33 @@ public class Analizador extends javax.swing.JFrame {
     FileInputStream entrada;
     FileOutputStream salida;
 
+    RSyntaxTextArea txtEntradaPrincipal = new RSyntaxTextArea();
+
     public Analizador() {
         initComponents();
-        
+        rsyntax();
         this.setLocationRelativeTo(null);
-        
-    } 
 
-  
-//Abre el archivo
-public String abrirArchivo(File archivo) {
+    }
+    /*
+     main(){
+     int a=2;
+     int b = 1;
+     if(a==b){
+     int c=3;
+     String d="HolaReyna";
+     }
+     }
+     {
+     "escuela" : "UACAM",
+     "facultad" : "ISC",
+     "semestre" : 7.
+     "activo" : true
+     */
+
+    //Abre el archivo
+
+    public String abrirArchivo(File archivo) {
         String documento = "";
 
         try {
@@ -57,6 +76,21 @@ public String abrirArchivo(File archivo) {
         return mensaje;
     }
 
+    public void rsyntax() {
+
+        // 1. Añadir estilo de lenguaje Java
+        txtEntradaPrincipal.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
+        // 2. Quilar la línea amarilla de la posición del cursor
+        txtEntradaPrincipal.setHighlightCurrentLine(false);
+        // 3. Inicializar txtEntrada con un mensaje de bienvenida
+        txtEntradaPrincipal.setText("//Hola mundo");
+
+        // 4. Integrar txtEntrada a TextScolPane
+        RTextScrollPane sp = new RTextScrollPane(txtEntradaPrincipal);
+        // 5. Integrar a nuestro objeto jPanelPrincipal
+        Principal.add(sp);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -72,6 +106,7 @@ public String abrirArchivo(File archivo) {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtSalida = new javax.swing.JTextArea();
+        Principal = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtSintaxis = new javax.swing.JTextArea();
 
@@ -109,11 +144,14 @@ public String abrirArchivo(File archivo) {
         txtEntrada.setRows(5);
         jScrollPane1.setViewportView(txtEntrada);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Consola");
 
         txtSalida.setColumns(20);
         txtSalida.setRows(5);
         jScrollPane2.setViewportView(txtSalida);
+
+        Principal.setLayout(new java.awt.CardLayout());
 
         txtSintaxis.setColumns(20);
         txtSintaxis.setRows(5);
@@ -123,57 +161,63 @@ public String abrirArchivo(File archivo) {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(Principal, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(270, 270, 270)
-                        .addComponent(jLabel1))
+                        .addComponent(jLabel1)
+                        .addGap(46, 46, 46)
+                        .addComponent(btnAnalizar))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtLiga)
-                                    .addComponent(txtExp, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE))
-                                .addGap(42, 42, 42)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnRegEx)
-                                        .addGap(36, 36, 36)
-                                        .addComponent(btnAnalizar))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnAbrir)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnGuardar))))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtExp, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtLiga, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnAbrir)
                                 .addGap(18, 18, 18)
-                                .addComponent(jScrollPane3)))))
-                .addContainerGap(35, Short.MAX_VALUE))
+                                .addComponent(btnGuardar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnRegEx))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(31, 31, 31))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAbrir, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardar)
-                    .addComponent(txtLiga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegEx)
-                    .addComponent(btnAnalizar)
-                    .addComponent(txtExp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnRegEx)
+                        .addComponent(btnGuardar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAbrir, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtLiga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane3)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))
-                .addGap(28, 28, 28))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnAnalizar)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(txtExp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Principal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -214,17 +258,14 @@ public String abrirArchivo(File archivo) {
         PrintWriter escribir;
         try {
             escribir = new PrintWriter(archivo);
-            escribir.print(txtEntrada.getText());
+            escribir.print(txtEntradaPrincipal.getText());
             escribir.close();
-        
 
-} catch (FileNotFoundException ex) {
-// Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            java.util.logging.Logger.getLogger(JFlexPro.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            // Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFlexPro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-// try {
+        // try {
         Reader lector;
         try {
             /* lector = new BufferedReader(new FileReader("archivo.txt"));
@@ -253,27 +294,20 @@ public String abrirArchivo(File archivo) {
              }*/
             analizarLexico();
             analizarSintaxis();
-        
 
-} catch (FileNotFoundException ex) {
-// Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            java.util.logging.Logger.getLogger(JFlexPro.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } 
-
-catch (IOException ex) {
-// Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            java.util.logging.Logger.getLogger(JFlexPro.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            // Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFlexPro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            // Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFlexPro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
 
     private void analizarLexico() throws IOException {
         int cont = 1;
 
-        String expr = (String) txtEntrada.getText();
+        String expr = (String) txtEntradaPrincipal.getText();
         Lexer lexer = new Lexer(new StringReader(expr));
         String resultad = "LINEA " + cont + "\t\tSIMBOLO\n";
         while (true) {
@@ -374,6 +408,12 @@ catch (IOException ex) {
                 case ERROR:
                     resultad += "  <Simbolo no definido>\n";
                     break;
+                case Coma_Simple:
+                    resultad += " <Coma>\t" + lexer.lexeme + "\n";
+                    break;
+                case Dos_Puntos:
+                    resultad += " <Dos Puntos>\t" + lexer.lexeme + "\n";
+                    break;
                 default:
                     resultad += "  < " + lexer.lexeme + " >\n";
                     break;
@@ -389,7 +429,7 @@ catch (IOException ex) {
             txtSintaxis.setText("Análisis realizado correctamente");
         } catch (Exception ex) {
             Symbol sym = s.getS();
-            txtSintaxis.setText("Error de sintaxis. Línea: " + (sym.right + 1) + " Columna: " + (sym.left + 1) + ", Texto:\"" + sym.value + "\"" );
+            txtSintaxis.setText("Error de sintaxis. Línea: " + (sym.right + 1) + " Columna: " + (sym.left + 1) + ", Texto:\"" + sym.value + "\"");
         }
 
 
@@ -427,45 +467,34 @@ catch (IOException ex) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
 
-                
-
-}
+                }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Analizador.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } 
-
-catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Analizador.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } 
-
-catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Analizador.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } 
-
-catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Analizador.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Analizador.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Analizador.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Analizador.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Analizador.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
-        public void run() {
+            public void run() {
                 new Analizador().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Principal;
     private javax.swing.JButton btnAbrir;
     private javax.swing.JButton btnAnalizar;
     private javax.swing.JButton btnGuardar;

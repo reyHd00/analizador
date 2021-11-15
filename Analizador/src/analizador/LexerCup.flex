@@ -81,6 +81,10 @@ Symbol(sym.Op_relacional);}
 ( ";" ) {return new Symbol(sym.P_coma);}
 /* Identificador */
 {L}({L}|{D})* {return new Symbol(sym.Identificador);}
+/* Dos Puntos */
+( ":" ) {return new Symbol(sym.Dos_Puntos);}
+/* Coma */
+( "," ) {return new Symbol(sym.Coma_Simple);}
 /* Numero */
 ("(-"{D}+")")|{D}+ {return new Symbol(sym.Numero);}
 /* Error de analisis */
